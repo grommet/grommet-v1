@@ -1,0 +1,12 @@
+.idea/**
+node_modules/**
+dist/**
+.eslintcache
+coverage
+.vscode
+npm-debug.log
+yarn-error.log
+.DS_Store
+.tmp/
+grommet-*-licenses.json
+grommet-*-src-with-dependecies.tgz
