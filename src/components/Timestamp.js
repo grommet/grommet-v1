@@ -1,18 +1,25 @@
 import React from 'react';
-import moment from 'moment';
 import { Text } from 'grommet';
 
 export default ({ fields, value, ...rest }) => {
-  const date = moment(value);
-  let format;
+  const date = new Date(value);
+  let content;
   if (fields === 'date') {
-    format = 'LL';
+    content = date.toLocaleDateString(undefined,
+      { year: 'numeric', month: 'short', day: 'numeric' });
   } else if (fields === 'time') {
-    format = 'LT';
+    content = date.toLocaleTimeString(undefined,
+      { hour: 'numeric', minute: '2-digit' });
   } else {
-    format = 'LLL';
+    content = date.toLocaleString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
   }
   return (
-    <Text {...rest}>{date.format(format)}</Text>
+    <Text {...rest}>{content}</Text>
   );
 };

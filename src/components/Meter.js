@@ -1,9 +1,6 @@
 import React from 'react';
 import { Meter, Stack } from 'grommet';
-
-const normalizeColorIndex = colorIndex => (
-  colorIndex === 'unset' ? 'light-3' : (colorIndex || 'accent-1')
-);
+import { colorIndexToColor } from '../utils/color';
 
 export default ({
   activeIndex, colorIndex, label, max, onActive, series, size, type, units,
@@ -25,7 +22,7 @@ export default ({
   if (series) {
     values = series.map((s, index) => ({
       color: ((activeIndex === undefined || activeIndex === index) ?
-        normalizeColorIndex(s.colorIndex) :
+        (colorIndexToColor(s.colorIndex) || 'accent-1') :
         { color: 'light-2', opacity: 'medium' }),
       onClick: s.onClick,
       onHover: (onActive ? over => onActive(over ? index : undefined) : undefined),
@@ -33,7 +30,11 @@ export default ({
       value: s.value * scale,
     }));
   } else if (value !== undefined) {
-    values = [{ color: normalizeColorIndex(colorIndex), label, value: value * scale }];
+    values = [{
+      color: (colorIndexToColor(colorIndex) || 'accent-1'),
+      label,
+      value: value * scale,
+    }];
   }
 
   let content = (

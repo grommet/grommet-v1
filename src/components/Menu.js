@@ -1,9 +1,11 @@
 import React, { Children, cloneElement } from 'react';
 import { Box, DropButton, Menu } from 'grommet';
+import { colorIndexToColor } from '../utils/color';
 
 export default ({
-  children, direction, fill, icon, inline, label, primary, ...rest
+  children, colorIndex, direction, dropAlign, fill, icon, inline, label, primary, ...rest
 }) => {
+  const background = colorIndex ? colorIndexToColor(colorIndex) : undefined;
   let content;
   if (primary || inline || (!icon && !label)) {
     const styledChildren = Children.map(children, (child) => {
@@ -26,6 +28,7 @@ export default ({
         direction={direction}
         flex={fill ? true : undefined}
         overflow={fill ? 'auto' : undefined}
+        background={background}
         {...rest}
       >
         {styledChildren}
@@ -34,18 +37,23 @@ export default ({
   } else if (children && (icon || label)) {
     content = (
       <DropButton
+        align={dropAlign}
         control={(
-          <Box direction='row' align='center'>
+          <Box direction='row' align='center' pad='small'>
             {icon}
             {label}
           </Box>
         )}
       >
-        {children}
+        <Box background={background}>
+          {children}
+        </Box>
       </DropButton>
     );
   } else {
-    content = <Menu icon={icon} label={label} {...rest} />;
+    content = (
+      <Menu icon={icon} label={label} background={background} {...rest} />
+    );
   }
   return content;
 };

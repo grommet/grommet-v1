@@ -20,5 +20,5 @@ export default ({ children, flex, separator, ...rest }) => {
     }
     return child;
   });
-  return <Box direction='row' full={true} {...rest}>{adjustedChildren}</Box>;
+  return <Box direction='row' fill={true} {...rest}>{adjustedChildren}</Box>;
 };

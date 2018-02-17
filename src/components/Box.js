@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from 'grommet';
 
-export default ({ colorIndex, separator, size, texture, ...rest }) => {
+export default ({ colorIndex, full, separator, size, texture, ...rest }) => {
   let background;
   if (texture) {
     background = { image: texture };
@@ -19,6 +19,7 @@ export default ({ colorIndex, separator, size, texture, ...rest }) => {
       background={background}
       border={separator}
       basis={size}
+      fill={full}
       gap={rest.pad && rest.pad.between}
       {...rest}
     />

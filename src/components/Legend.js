@@ -1,9 +1,6 @@
 import React from 'react';
 import { Box, Button, Text } from 'grommet';
-
-const normalizeColorIndex = colorIndex => (
-  colorIndex === 'unset' ? 'light-3' : colorIndex
-);
+import { colorIndexToColor } from '../utils/color';
 
 const Item = ({
   colorIndex, index, label, onActive, onClick, total, units, value,
@@ -20,7 +17,7 @@ const Item = ({
       <Box direction='row' align='center' justify='start'>
         <Box
           pad='xsmall'
-          background={normalizeColorIndex(colorIndex)}
+          background={colorIndexToColor(colorIndex)}
           margin={{ right: 'small' }}
         />
         <Box margin={{ right: 'medium' }}>
@@ -63,7 +60,7 @@ const Item = ({
 export default ({ activeIndex, onActive, series, size, total, units, ...rest }) => {
   let sum = 0;
   return (
-    <Box flex={false} {...rest}>
+    <Box flex={true} {...rest}>
       {series.map((data, index) => {
         sum += data.value;
         return (
