@@ -1,3 +1,10 @@
+
+Please note that this library is outdated and not maintained.
+
+Feel free to contact us on our Slack for more info.
+
+***********************************************************************
+
 # grommet-v1
 A mapping of v1 component signatures to v2 implementations
 
